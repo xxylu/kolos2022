@@ -1,17 +1,21 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CountryWithoutProvinces extends Country{
-    List<LocalDate> dateList = new ArrayList<>();
-    List<Integer> deathsList = new ArrayList<>();;
-    List<Integer> confirmedCasesList = new ArrayList<>();;
+public class CountryWithoutProvinces extends Country {
+    Map<LocalDate, Pair> statistics = new HashMap<>();
     public CountryWithoutProvinces(String name){
         super(name);
     }
-    public void addDailyStatistic(LocalDate date,int deaths,int confirmedCases){
-        dateList.add(date);
-        deathsList.add(deaths);
-        confirmedCasesList.add(confirmedCases);
+    public void addDailyStatistics(LocalDate date, int deaths, int cases){
+        this.statistics.put(date,new Pair(deaths,cases));
+    }
+    @Override
+    int getConfirmedCases(LocalDate date){
+        return statistics.get(date).val2;
+    }
+    @Override
+    int getDeaths(LocalDate date){
+        return statistics.get(date).val1;
     }
 }

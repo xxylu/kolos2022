@@ -1,5 +1,5 @@
 public class CountryNotFoundException extends Exception{
-    public String getName(String name){
-        return name;
+    public CountryNotFoundException(String message){
+        super(message);
     }
 }
